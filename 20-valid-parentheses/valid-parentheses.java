@@ -1,21 +1,33 @@
+import java.util.ArrayDeque;
+
 class Solution {
+
     public boolean isValid(String s) {
-          ArrayDeque<Character> stack = new ArrayDeque<>();
-        for(char ch:s.toCharArray()){
-            if(ch =='(' || ch=='{' || ch=='['){
-                stack.push(ch);
+
+        ArrayDeque<Character> stack = new ArrayDeque<>();
+
+        for (char ch : s.toCharArray()) {
+
+            if (ch == '(') {
+                stack.push(')');
             }
-            else{
-                if(stack.isEmpty()){
-                    return false;
-                    
-                } 
-                char top=stack.pop();
-                if((ch==')' && top!='(')||(ch=='}' && top!='{')||(ch==']' && top!='[')){
+
+            else if (ch == '{') {
+                stack.push('}');
+            }
+
+            else if (ch == '[') {
+                stack.push(']');
+            }
+
+            else {
+
+                if (stack.isEmpty() || stack.pop() != ch) {
                     return false;
                 }
             }
         }
+
         return stack.isEmpty();
     }
 }
